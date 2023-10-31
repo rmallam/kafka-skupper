@@ -1,0 +1,12 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: pod-kill-httpd
+spec:
+  action: pod-kill
+  mode: one
+  duration: '5m'
+  gracePeriod: 15
+  selector:
+    labelSelectors:
+      "statefulset.kubernetes.io/pod-name": "kafka-broker-0"

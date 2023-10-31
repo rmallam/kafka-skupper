@@ -1,0 +1,17 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Schedule
+metadata:
+  name: schedule-delay-example
+spec:
+  schedule: '5 * * * *'
+  historyLimit: 2
+  concurrencyPolicy: 'Allow'
+  type: 'podChaos'
+  podChaos:
+    action: pod-kill
+    mode: one
+    selector:
+      namespaces:
+        - kafka-site2
+      labelSelectors:
+          "statefulset.kubernetes.io/pod-name": "kafka-broker-0"
